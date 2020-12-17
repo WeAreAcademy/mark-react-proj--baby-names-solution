@@ -77,7 +77,7 @@ const BabyNamesApp = () => {
   );
 };
 
-interface SearchBarProps {
+interface ISearchBarProps {
   searchTerm: string;
   setSearchTerm: (st: string) => void;
   selectMale: () => void;
@@ -86,7 +86,7 @@ interface SearchBarProps {
   selectedGender: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({
+const SearchBar: React.FC<ISearchBarProps> = ({
   searchTerm,
   setSearchTerm,
   selectMale,
@@ -130,13 +130,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
   );
 };
 
-interface FavouritesListProps {
+interface IFavouritesListProps {
   allNames: NameInfo[];
   favouritesIds: Id[];
   clickHandler: NameClickHandler;
 }
 
-const FavouritesList: React.FC<FavouritesListProps> = ({
+const FavouritesList: React.FC<IFavouritesListProps> = ({
   allNames,
   favouritesIds,
   clickHandler,
@@ -168,12 +168,12 @@ const FavouritesList: React.FC<FavouritesListProps> = ({
 const classForName = ({ sex }: { sex: string }) =>
   sex === "m" ? "male" : "female";
 
-interface BabyNameProps {
+interface IBabyNameProps {
   nameObj: NameInfo;
   clickHandler: NameClickHandler;
 }
 
-const BabyName: React.FC<BabyNameProps> = ({ nameObj, clickHandler }) => {
+const BabyName: React.FC<IBabyNameProps> = ({ nameObj, clickHandler }) => {
   return (
     <li
       className={"name " + classForName(nameObj)}
@@ -184,12 +184,12 @@ const BabyName: React.FC<BabyNameProps> = ({ nameObj, clickHandler }) => {
   );
 };
 
-interface MainListProps {
+interface IMainListProps {
   names: NameInfo[];
   clickHandler: NameClickHandler;
 }
 
-const MainList: React.FC<MainListProps> = ({ names, clickHandler }) => {
+const MainList: React.FC<IMainListProps> = ({ names, clickHandler }) => {
   return (
     <div>
       <ul>
