@@ -77,20 +77,22 @@ const BabyNamesApp = () => {
   );
 };
 
-const SearchBar = ({
-  searchTerm,
-  setSearchTerm,
-  selectMale,
-  selectFemale,
-  selectAllGenders,
-  selectedGender,
-}: {
+interface SearchBarProps {
   searchTerm: string;
   setSearchTerm: (st: string) => void;
   selectMale: () => void;
   selectFemale: () => void;
   selectAllGenders: () => void;
   selectedGender: string;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({
+  searchTerm,
+  setSearchTerm,
+  selectMale,
+  selectFemale,
+  selectAllGenders,
+  selectedGender,
 }) => {
   return (
     <>
@@ -127,15 +129,17 @@ const SearchBar = ({
     </>
   );
 };
-//TODO: tidy this sig
-const FavouritesList = ({
-  allNames,
-  favouritesIds,
-  clickHandler,
-}: {
+
+interface FavouritesListProps {
   allNames: NameInfo[];
   favouritesIds: Id[];
   clickHandler: NameClickHandler;
+}
+
+const FavouritesList: React.FC<FavouritesListProps> = ({
+  allNames,
+  favouritesIds,
+  clickHandler,
 }) => {
   return (
     <div className="favourites">
@@ -164,13 +168,12 @@ const FavouritesList = ({
 const classForName = ({ sex }: { sex: string }) =>
   sex === "m" ? "male" : "female";
 
-const BabyName = ({
-  nameObj,
-  clickHandler,
-}: {
+interface BabyNameProps {
   nameObj: NameInfo;
   clickHandler: NameClickHandler;
-}) => {
+}
+
+const BabyName: React.FC<BabyNameProps> = ({ nameObj, clickHandler }) => {
   return (
     <li
       className={"name " + classForName(nameObj)}
@@ -181,13 +184,12 @@ const BabyName = ({
   );
 };
 
-const MainList = ({
-  names,
-  clickHandler,
-}: {
+interface MainListProps {
   names: NameInfo[];
   clickHandler: NameClickHandler;
-}) => {
+}
+
+const MainList: React.FC<MainListProps> = ({ names, clickHandler }) => {
   return (
     <div>
       <ul>
