@@ -2,28 +2,36 @@
 
 import React, { useState } from "react";
 import BabyNamesData from "./BabyNamesData.json";
-import "./BabyNamesChallenge.css";
+import "./BabyNamesApp.css";
+
+type Id = number;
+interface NameInfo {
+  name: string;
+  sex: string;
+  id: Id;
+}
+type NameClickHandler = (nameObj: NameInfo) => void;
 
 BabyNamesData.sort((a, b) => (a.name < b.name ? -1 : 1));
 
-const BabyNamesChallenge = (props) => {
+const BabyNamesApp = () => {
   //HOOKS------------------------------------------------
   const [searchTerm, setSearchTerm] = useState("");
-  const [favouritesIds, setFavouritesIds] = useState([]);
+  const [favouritesIds, setFavouritesIds] = useState([] as Id[]); //TODO: don't use `as`
   const [selectedGender, setSelectedGender] = useState("a");
   //-----------------------------------------------------
 
-  const addFavourite = (nameObj) => {
+  const addFavourite = (nameObj: NameInfo): void => {
     setFavouritesIds(favouritesIds.concat([nameObj.id]));
   };
 
-  const removeFavourite = (nameObj) => {
+  const removeFavourite = (nameObj: NameInfo): void => {
     console.log("removing", nameObj.name);
     const newIds = favouritesIds.filter((id) => id !== nameObj.id);
     setFavouritesIds(newIds);
   };
 
-  const filterForSearch = (names) => {
+  const filterForSearch = (names: NameInfo[]) => {
     return searchTerm.trim().length > 0
       ? names.filter((o) =>
           o.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -31,12 +39,12 @@ const BabyNamesChallenge = (props) => {
       : names;
   };
 
-  const filterByGender = (names) => {
+  const filterByGender = (names: NameInfo[]) => {
     return names.filter(
       (o) => selectedGender === "a" || selectedGender === o.sex
     );
   };
-  const filterOutFavourites = (names) => {
+  const filterOutFavourites = (names: NameInfo[]) => {
     return names.filter((o) => !favouritesIds.includes(o.id));
   };
   const selectMale = () => setSelectedGender("m");
@@ -76,6 +84,13 @@ const SearchBar = ({
   selectFemale,
   selectAllGenders,
   selectedGender,
+}: {
+  searchTerm: string;
+  setSearchTerm: (st: string) => void;
+  selectMale: () => void;
+  selectFemale: () => void;
+  selectAllGenders: () => void;
+  selectedGender: string;
 }) => {
   return (
     <>
@@ -112,8 +127,16 @@ const SearchBar = ({
     </>
   );
 };
-
-const FavouritesList = ({ allNames, favouritesIds, clickHandler }) => {
+//TODO: tidy this sig
+const FavouritesList = ({
+  allNames,
+  favouritesIds,
+  clickHandler,
+}: {
+  allNames: NameInfo[];
+  favouritesIds: Id[];
+  clickHandler: NameClickHandler;
+}) => {
   return (
     <div className="favourites">
       <span>Favourites: </span>
@@ -123,21 +146,31 @@ const FavouritesList = ({ allNames, favouritesIds, clickHandler }) => {
         ) : (
           favouritesIds
             .map((favId) => allNames.find((obj) => obj.id === favId))
-            .map((nameObj) => (
-              <BabyName
-                nameObj={nameObj}
-                clickHandler={clickHandler}
-                key={nameObj.id}
-              />
-            ))
+            .map(
+              (nameObj) =>
+                nameObj && ( //TODO: deal correctly with missing favourites
+                  <BabyName
+                    nameObj={nameObj}
+                    clickHandler={clickHandler}
+                    key={nameObj.id}
+                  />
+                )
+            )
         )}
       </ul>
     </div>
   );
 };
-const classForName = ({ sex }) => (sex === "m" ? "male" : "female");
+const classForName = ({ sex }: { sex: string }) =>
+  sex === "m" ? "male" : "female";
 
-const BabyName = ({ nameObj, clickHandler }) => {
+const BabyName = ({
+  nameObj,
+  clickHandler,
+}: {
+  nameObj: NameInfo;
+  clickHandler: NameClickHandler;
+}) => {
   return (
     <li
       className={"name " + classForName(nameObj)}
@@ -148,7 +181,13 @@ const BabyName = ({ nameObj, clickHandler }) => {
   );
 };
 
-const MainList = ({ names, clickHandler }) => {
+const MainList = ({
+  names,
+  clickHandler,
+}: {
+  names: NameInfo[];
+  clickHandler: NameClickHandler;
+}) => {
   return (
     <div>
       <ul>
@@ -164,7 +203,7 @@ const MainList = ({ names, clickHandler }) => {
   );
 };
 
-const Footer = (props) => {
+const Footer = () => {
   return (
     <footer>
       <a href="https://excalidraw.com/#json=5680880538353664,5FOVmiVqJ_XfHphPRCxGCA">
@@ -174,4 +213,4 @@ const Footer = (props) => {
   );
 };
 
-export default BabyNamesChallenge;
+export default BabyNamesApp;
