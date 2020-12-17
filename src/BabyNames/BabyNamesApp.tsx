@@ -17,7 +17,7 @@ BabyNamesData.sort((a, b) => (a.name < b.name ? -1 : 1));
 const BabyNamesApp = () => {
   //HOOKS------------------------------------------------
   const [searchTerm, setSearchTerm] = useState("");
-  const [favouritesIds, setFavouritesIds] = useState([] as Id[]); //TODO: don't use `as`
+  const [favouritesIds, setFavouritesIds] = useState<Id[]>([]);
   const [selectedGender, setSelectedGender] = useState("a");
   //-----------------------------------------------------
 
