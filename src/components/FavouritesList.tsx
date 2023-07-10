@@ -1,5 +1,5 @@
 import { BabyName } from "../core/babyName";
-import { BabyNameView, NameClickHandler } from "./BabyName";
+import { BabyNameView, NameClickHandler } from "./BabyNameView";
 
 export interface FavouritesListProps {
     favourites: BabyName[];

@@ -1,5 +1,5 @@
 import { BabyName } from "../core/babyName";
-import { BabyNameView, NameClickHandler } from "./BabyName";
+import { BabyNameView, NameClickHandler } from "./BabyNameView";
 
 interface MainListProps {
     names: BabyName[];
@@ -9,11 +9,11 @@ export function MainList({ names, clickHandler }: MainListProps) {
     return (
         <div>
             <ul>
-                {names.map((nameObj) => (
+                {names.map((name) => (
                     <BabyNameView
-                        key={nameObj.id}
+                        key={name.id}
+                        babyName={name}
                         clickHandler={clickHandler}
-                        babyName={nameObj}
                     />
                 ))}
             </ul>
