@@ -1,6 +1,5 @@
 import { NameInfo } from "../core/nameInfo";
-import { BabyName } from "./BabyName";
-import { NameClickHandler } from "./BabyNamesApp";
+import { BabyName, NameClickHandler } from "./BabyName";
 
 interface IMainListProps {
     names: NameInfo[];
@@ -14,7 +13,7 @@ export function MainList({ names, clickHandler }: IMainListProps) {
                     <BabyName
                         key={nameObj.id}
                         clickHandler={clickHandler}
-                        nameObj={nameObj}
+                        nameInfo={nameObj}
                     />
                 ))}
             </ul>

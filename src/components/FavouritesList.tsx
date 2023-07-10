@@ -1,6 +1,5 @@
 import { BabyNameId, NameInfo } from "../core/nameInfo";
-import { BabyName } from "./BabyName";
-import { NameClickHandler } from "./BabyNamesApp";
+import { BabyName, NameClickHandler } from "./BabyName";
 
 export interface IFavouritesListProps {
     allNames: NameInfo[];
@@ -23,19 +22,16 @@ export function FavouritesList({
                     </span>
                 ) : (
                     favouritesIds
-                        .map((favId) =>
-                            allNames.find((obj) => obj.id === favId)
-                        )
                         .map(
-                            (nameObj) =>
-                                nameObj && ( //TODO: deal correctly with missing favourites
-                                    <BabyName
-                                        key={nameObj.id}
-                                        nameObj={nameObj}
-                                        clickHandler={clickHandler}
-                                    />
-                                )
+                            (favId) => allNames.find((obj) => obj.id === favId)!
                         )
+                        .map((nameInfo) => (
+                            <BabyName
+                                key={nameInfo.id}
+                                nameInfo={nameInfo}
+                                clickHandler={clickHandler}
+                            />
+                        ))
                 )}
             </ul>
         </div>

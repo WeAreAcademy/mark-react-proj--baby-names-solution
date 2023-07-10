@@ -1,16 +1,13 @@
 //Flow diagram: https://excalidraw.com/#json=5680880538353664,5FOVmiVqJ_XfHphPRCxGCA
-
 import { useState } from "react";
-import BabyNamesData from "../data/babyNamesData.json";
+import babyNamesData from "../data/babyNamesData.json";
 import { FavouritesList } from "./FavouritesList";
 import { Footer } from "./Footer";
 import { MainList } from "./MainList";
 import { SearchBar } from "./SearchBar";
-import { BabyNameId, NameInfo } from "../core/nameInfo";
+import { BabyNameId, NameInfo, sortNames } from "../core/nameInfo";
 
-export type NameClickHandler = (nameObj: NameInfo) => void;
-
-BabyNamesData.sort((a, b) => (a.name < b.name ? -1 : 1));
+const sortedBabyNames: NameInfo[] = sortNames(babyNamesData);
 
 const BabyNamesApp = () => {
     //HOOKS------------------------------------------------
@@ -20,11 +17,12 @@ const BabyNamesApp = () => {
     //-----------------------------------------------------
 
     const addFavourite = (nameObj: NameInfo): void => {
-        setFavouritesIds(favouritesIds.concat([nameObj.id]));
+        if (!favouritesIds.includes(nameObj.id)) {
+            setFavouritesIds((prevIds) => [...prevIds, nameObj.id]);
+        }
     };
 
     const removeFavourite = (nameObj: NameInfo): void => {
-        console.log("removing", nameObj.name);
         const newIds = favouritesIds.filter((id) => id !== nameObj.id);
         setFavouritesIds(newIds);
     };
@@ -60,13 +58,13 @@ const BabyNamesApp = () => {
                 selectedGender={selectedGender}
             />
             <FavouritesList
-                allNames={BabyNamesData}
+                allNames={sortedBabyNames}
                 favouritesIds={favouritesIds}
                 clickHandler={removeFavourite}
             />
             <MainList
                 names={filterOutFavourites(
-                    filterByGender(filterForSearch(BabyNamesData))
+                    filterByGender(filterForSearch(sortedBabyNames))
                 )}
                 clickHandler={addFavourite}
             />
@@ -74,13 +72,5 @@ const BabyNamesApp = () => {
         </div>
     );
 };
-
-export const classForName = ({ sex }: { sex: string }) =>
-    sex === "m" ? "male" : "female";
-
-export interface IBabyNameProps {
-    nameObj: NameInfo;
-    clickHandler: NameClickHandler;
-}
 
 export default BabyNamesApp;

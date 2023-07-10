@@ -1,7 +1,17 @@
-import { IBabyNameProps, classForName } from "./BabyNamesApp";
+import { NameInfo } from "../core/nameInfo";
+
+export type NameClickHandler = (nameObj: NameInfo) => void;
+
+export const classForName = ({ sex }: { sex: string }) =>
+    sex === "m" ? "male" : "female";
+
+export interface IBabyNameProps {
+    nameInfo: NameInfo;
+    clickHandler: NameClickHandler;
+}
 
 export function BabyName({
-    nameObj,
+    nameInfo: nameObj,
     clickHandler,
 }: IBabyNameProps): JSX.Element {
     return (
