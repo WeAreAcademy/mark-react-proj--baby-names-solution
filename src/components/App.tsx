@@ -1,6 +1,5 @@
-import React from "react";
-import BabyNamesApp from "./BabyNamesApp";
 import "./App.css";
+import BabyNamesApp from "./BabyNamesApp";
 function App() {
     return (
         <div className="App">
