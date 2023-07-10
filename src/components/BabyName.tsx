@@ -1,25 +1,25 @@
-import { NameInfo } from "../core/nameInfo";
+import { BabyName } from "../core/babyName";
 
-export type NameClickHandler = (nameObj: NameInfo) => void;
+export type NameClickHandler = (nameObj: BabyName) => void;
 
 export const classForName = ({ sex }: { sex: string }) =>
     sex === "m" ? "male" : "female";
 
-export interface IBabyNameProps {
-    nameInfo: NameInfo;
+export interface BabyNameViewProps {
+    babyName: BabyName;
     clickHandler: NameClickHandler;
 }
 
-export function BabyName({
-    nameInfo: nameObj,
+export function BabyNameView({
+    babyName,
     clickHandler,
-}: IBabyNameProps): JSX.Element {
+}: BabyNameViewProps): JSX.Element {
     return (
         <li
-            className={"name " + classForName(nameObj)}
-            onClick={(e) => clickHandler(nameObj)}
+            className={"name " + classForName(babyName)}
+            onClick={(e) => clickHandler(babyName)}
         >
-            {nameObj.name}
+            {babyName.name}
         </li>
     );
 }

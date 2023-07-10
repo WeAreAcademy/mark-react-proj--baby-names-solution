@@ -1,4 +1,4 @@
-export interface ISearchBarProps {
+export interface SearchBarProps {
     searchTerm: string;
     setSearchTerm: (st: string) => void;
     selectMale: () => void;
@@ -14,7 +14,7 @@ export function SearchBar({
     selectFemale,
     selectAllSexes,
     selectedSex,
-}: ISearchBarProps): JSX.Element {
+}: SearchBarProps): JSX.Element {
     return (
         <>
             <div className="controlBar">

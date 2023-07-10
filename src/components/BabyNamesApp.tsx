@@ -5,9 +5,9 @@ import { FavouritesList } from "./FavouritesList";
 import { Footer } from "./Footer";
 import { MainList } from "./MainList";
 import { SearchBar } from "./SearchBar";
-import { BabyNameId, NameInfo, Sex, sortNames } from "../core/nameInfo";
+import { BabyNameId, BabyName, Sex, sortNames } from "../core/babyName";
 
-const sortedBabyNames: NameInfo[] = sortNames(babyNamesData as NameInfo[]);
+const sortedBabyNames: BabyName[] = sortNames(babyNamesData as BabyName[]);
 
 const BabyNamesApp = () => {
     type SexFilter = Sex | "a";
@@ -18,18 +18,18 @@ const BabyNamesApp = () => {
     const [selectedSex, setSelectedSex] = useState<SexFilter>("a");
     //-----------------------------------------------------
 
-    function addFavourite(nameToAdd: NameInfo): void {
+    function addFavourite(nameToAdd: BabyName): void {
         if (!favouritesIds.includes(nameToAdd.id)) {
             setFavouritesIds((prevIds) => [...prevIds, nameToAdd.id]);
         }
     }
 
-    function removeFavourite(nameToRemove: NameInfo): void {
+    function removeFavourite(nameToRemove: BabyName): void {
         const newIds = favouritesIds.filter((id) => id !== nameToRemove.id);
         setFavouritesIds(newIds);
     }
 
-    function filterForSearch(names: NameInfo[]): NameInfo[] {
+    function filterForSearch(names: BabyName[]): BabyName[] {
         return searchTerm.trim().length > 0
             ? names.filter((o) =>
                   o.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -37,18 +37,23 @@ const BabyNamesApp = () => {
             : names;
     }
 
-    function filterBySex(names: NameInfo[]): NameInfo[] {
+    function filterBySex(names: BabyName[]): BabyName[] {
         return names.filter(
             (o) => selectedSex === "a" || selectedSex === o.sex
         );
     }
-    function filterOutFavourites(names: NameInfo[]): NameInfo[] {
+    function filterOutFavourites(names: BabyName[]): BabyName[] {
         return names.filter((o) => !favouritesIds.includes(o.id));
     }
 
     const selectMale = () => setSelectedSex("m");
     const selectFemale = () => setSelectedSex("f");
     const selectAllSexes = () => setSelectedSex("a");
+
+    const favouriteNames = favouritesIds.map(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        (favId) => sortedBabyNames.find((name) => name.id === favId)!
+    );
 
     return (
         <div className="main">
@@ -61,8 +66,7 @@ const BabyNamesApp = () => {
                 selectedSex={selectedSex}
             />
             <FavouritesList
-                allNames={sortedBabyNames}
-                favouritesIds={favouritesIds}
+                favourites={favouriteNames}
                 clickHandler={removeFavourite}
             />
             <MainList

@@ -1,19 +1,19 @@
-import { NameInfo } from "../core/nameInfo";
-import { BabyName, NameClickHandler } from "./BabyName";
+import { BabyName } from "../core/babyName";
+import { BabyNameView, NameClickHandler } from "./BabyName";
 
-interface IMainListProps {
-    names: NameInfo[];
+interface MainListProps {
+    names: BabyName[];
     clickHandler: NameClickHandler;
 }
-export function MainList({ names, clickHandler }: IMainListProps) {
+export function MainList({ names, clickHandler }: MainListProps) {
     return (
         <div>
             <ul>
                 {names.map((nameObj) => (
-                    <BabyName
+                    <BabyNameView
                         key={nameObj.id}
                         clickHandler={clickHandler}
-                        nameInfo={nameObj}
+                        babyName={nameObj}
                     />
                 ))}
             </ul>
