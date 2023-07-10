@@ -2,19 +2,6 @@
     "name": "mark-react-proj--baby-names",
     "version": "0.2.0",
     "private": true,
-    "dependencies": {
-        "@testing-library/jest-dom": "^5.16.5",
-        "@testing-library/react": "^14.0.0",
-        "@testing-library/user-event": "^14.4.3",
-        "@types/jest": "^29.5.3",
-        "@types/node": "^20.4.1",
-        "@types/react": "^18.2.14",
-        "@types/react-dom": "^18.2.6",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "react-scripts": "5.0.1",
-        "typescript": "^5.1.6"
-    },
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
@@ -42,9 +29,20 @@
     },
     "devDependencies": {
         "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^14.0.0",
+        "@testing-library/user-event": "^14.4.3",
+        "@types/jest": "^29.5.3",
+        "@types/node": "^20.4.1",
+        "@types/react-dom": "^18.2.6",
+        "@types/react": "^18.2.14",
         "@typescript-eslint/eslint-plugin": "^5.48.1",
         "@typescript-eslint/parser": "^5.48.1",
         "eslint-plugin-react": "^7.32.2",
-        "eslint": "^8.44.0"
+        "eslint": "^8.44.0",
+        "react-dom": "^18.2.0",
+        "react-scripts": "5.0.1",
+        "react": "^18.2.0",
+        "typescript": "^5.1.6"
     }
 }
