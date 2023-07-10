@@ -10,10 +10,10 @@ export interface SearchBarProps {
 export function SearchBar({
     searchTerm,
     setSearchTerm,
+    selectedSex,
     selectMale,
     selectFemale,
     selectAllSexes,
-    selectedSex,
 }: SearchBarProps): JSX.Element {
     return (
         <>
