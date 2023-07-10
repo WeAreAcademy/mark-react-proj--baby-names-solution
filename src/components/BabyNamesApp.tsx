@@ -1,11 +1,11 @@
 //Flow diagram: https://excalidraw.com/#json=5680880538353664,5FOVmiVqJ_XfHphPRCxGCA
 import { useState } from "react";
+import { BabyName, BabyNameId, Sex, sortNames } from "../core/babyName";
 import babyNamesData from "../data/babyNamesData.json";
 import { FavouritesList } from "./FavouritesList";
 import { Footer } from "./Footer";
 import { MainList } from "./MainList";
 import { SearchBar } from "./SearchBar";
-import { BabyNameId, BabyName, Sex, sortNames } from "../core/babyName";
 
 const sortedBabyNames: BabyName[] = sortNames(babyNamesData as BabyName[]);
 
@@ -25,8 +25,9 @@ const BabyNamesApp = () => {
     }
 
     function removeFavourite(nameToRemove: BabyName): void {
-        const newIds = favouritesIds.filter((id) => id !== nameToRemove.id);
-        setFavouritesIds(newIds);
+        setFavouritesIds((prevIds) =>
+            prevIds.filter((id) => id !== nameToRemove.id)
+        );
     }
 
     function filterForSearch(names: BabyName[]): BabyName[] {

@@ -13,21 +13,19 @@ export function FavouritesList({
     return (
         <div className="favourites">
             <span>Favourites: </span>
-            <ul>
-                {favourites.length === 0 ? (
-                    <span>
-                        Click some names below to add to your shortlist...
-                    </span>
-                ) : (
-                    favourites.map((babyName) => (
+            {favourites.length === 0 ? (
+                <span>Click some names below to add to your shortlist...</span>
+            ) : (
+                <ul>
+                    {favourites.map((babyName) => (
                         <BabyNameView
                             key={babyName.id}
                             babyName={babyName}
                             clickHandler={clickHandler}
                         />
-                    ))
-                )}
-            </ul>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 }
