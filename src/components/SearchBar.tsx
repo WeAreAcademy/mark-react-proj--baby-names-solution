@@ -1,10 +1,10 @@
 export interface SearchBarProps {
     searchTerm: string;
     setSearchTerm: (st: string) => void;
+    selectedSex: string;
     selectMale: () => void;
     selectFemale: () => void;
     selectAllSexes: () => void;
-    selectedSex: string;
 }
 
 export function SearchBar({
