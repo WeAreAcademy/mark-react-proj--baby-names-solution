@@ -24,17 +24,21 @@ export function byNotFavourites(
     };
 }
 
+/** Takes an array of filtering functions and returns a new function which applies those filters in turn to its input.
+ *
+ * This allows clear, declarative statement of pipelines.
+ */
 export function makeFilterPipeline<T>(filters: FilterFn<T>[]): FilterFn<T> {
     const filtersCopy = [...filters];
 
     function f(originalItems: T[]): T[] {
-        let itemsTemp: T[] = originalItems;
+        let itemsToKeep: T[] = originalItems;
         while (filtersCopy.length > 0) {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            const filter = filtersCopy.pop()!;
-            itemsTemp = filter(itemsTemp);
+            const filterFn = filtersCopy.pop()!;
+            itemsToKeep = filterFn(itemsToKeep);
         }
-        return itemsTemp;
+        return itemsToKeep;
     }
     return f;
 }
