@@ -3,8 +3,8 @@ export interface ISearchBarProps {
     setSearchTerm: (st: string) => void;
     selectMale: () => void;
     selectFemale: () => void;
-    selectAllGenders: () => void;
-    selectedGender: string;
+    selectAllSexes: () => void;
+    selectedSex: string;
 }
 
 export function SearchBar({
@@ -12,8 +12,8 @@ export function SearchBar({
     setSearchTerm,
     selectMale,
     selectFemale,
-    selectAllGenders,
-    selectedGender,
+    selectAllSexes,
+    selectedSex,
 }: ISearchBarProps): JSX.Element {
     return (
         <>
@@ -23,25 +23,25 @@ export function SearchBar({
                     onChange={(e) => setSearchTerm(e.target.value)}
                     value={searchTerm}
                 />
-                <span className="genderButtons">
+                <span className="sexButtons">
                     <div
                         title="show all names"
                         className={`chooser anyChooser ${
-                            selectedGender === "a" ? "selected" : ""
+                            selectedSex === "a" ? "selected" : ""
                         }`}
-                        onClick={selectAllGenders}
+                        onClick={selectAllSexes}
                     ></div>
                     <div
                         title="show only girls' names"
                         className={`chooser femaleChooser ${
-                            selectedGender === "f" ? "selected" : ""
+                            selectedSex === "f" ? "selected" : ""
                         }`}
                         onClick={selectFemale}
                     ></div>
                     <div
                         title="show only boys' names"
                         className={`chooser maleChooser ${
-                            selectedGender === "m" ? "selected" : ""
+                            selectedSex === "m" ? "selected" : ""
                         }`}
                         onClick={selectMale}
                     ></div>

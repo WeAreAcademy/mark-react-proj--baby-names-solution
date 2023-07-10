@@ -1,7 +1,10 @@
 export type BabyNameId = number;
+
+export type Sex = "m" | "f"
+
 export interface NameInfo {
     name: string;
-    sex: string;
+    sex: Sex;
     id: BabyNameId;
 }
 
