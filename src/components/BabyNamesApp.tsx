@@ -1,12 +1,7 @@
 //Flow diagram: https://excalidraw.com/#json=5680880538353664,5FOVmiVqJ_XfHphPRCxGCA
 import { useState } from "react";
 import { BabyName, sortNames } from "../core/babyName";
-import {
-    byNotFavourites,
-    bySearch,
-    bySex,
-    makeFilterPipeline,
-} from "../core/fancyFilters";
+import { byNotInList, bySearch, bySex } from "../core/fancyFilters";
 import { findAllByIdOrFail } from "../core/findAllInPoolOrFail";
 import babyNamesData from "../data/babyNamesData.json";
 import { useFavourites } from "../hooks/useFavourites";
@@ -24,15 +19,13 @@ const BabyNamesApp = () => {
     const { selectedSex, selectMale, selectFemale, selectAllSexes } =
         useSexFilter("a");
 
+    //get the corresponding names objects for the tracked ids
     const favouriteNames = findAllByIdOrFail(favouritesIds, sortedBabyNames);
 
-    const filterBySearchSexAndNotFaves = makeFilterPipeline([
-        bySearch(searchTerm),
-        bySex(selectedSex),
-        byNotFavourites(favouritesIds),
-    ]);
-
-    const mainNamesToShow = filterBySearchSexAndNotFaves(sortedBabyNames);
+    const mainNamesToShow = sortedBabyNames
+        .filter(bySearch(searchTerm))
+        .filter(bySex(selectedSex))
+        .filter(byNotInList(favouritesIds));
 
     return (
         <div className="main">

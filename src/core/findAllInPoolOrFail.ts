@@ -1,3 +1,6 @@
+/** return the objects corresponding to the given  ids from the given pool.
+ *
+ * Throw and error if there's an id for which we can't find a corresponding object. */
 export function findAllByIdOrFail<IdType, T extends { id: IdType }>(
     ids: IdType[],
     pool: T[]

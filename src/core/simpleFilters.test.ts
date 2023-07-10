@@ -1,5 +1,5 @@
 import { BabyName } from "./babyName";
-import { filterBySearch } from "./filterBySearch";
+import { filterBySearch } from "./simpleFilters";
 
 /** helper function to make a list of BabyName objects for a list of raw names */
 function makeNamesFor(ns: string[]): BabyName[] {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SexFilter } from "../core/filterBySex";
+import { SexFilter } from "../core/babyName";
 
 export function useSexFilter(defaultFilter: SexFilter) {
     const [selectedSex, setSelectedSex] = useState<SexFilter>(defaultFilter);
