@@ -1,4 +1,5 @@
 import { SexFilter } from "../core/babyName";
+import { useRandomPopSounds } from "../hooks/useRandomPopSounds";
 
 export interface SearchBarProps {
     searchTerm: string;
@@ -13,12 +14,16 @@ export function SearchBar({
     selectedSex,
     setSelectedSex,
 }: SearchBarProps): JSX.Element {
+    const playRandomPop = useRandomPopSounds();
     return (
         <>
             <div className="controlBar">
                 <input
                     placeholder="Search for a name..."
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={(e) => {
+                        playRandomPop();
+                        setSearchTerm(e.target.value);
+                    }}
                     value={searchTerm}
                 />
                 <span className="sexButtons">
