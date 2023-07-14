@@ -26,7 +26,12 @@ const BabyNamesApp = () => {
             <SearchBar
                 {...{ searchTerm, setSearchTerm, setSelectedSex, selectedSex }}
             />
-            <FavouritesList names={favourites} clickHandler={removeFavourite} />
+            <FavouritesList names={favourites}>
+                <BabyNameList
+                    names={favourites}
+                    clickHandler={removeFavourite}
+                />
+            </FavouritesList>
             <BabyNameList names={mainNamesToShow} clickHandler={addFavourite} />
         </div>
     );
