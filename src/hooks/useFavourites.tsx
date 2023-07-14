@@ -1,19 +1,19 @@
 import { useState } from "react";
-import { BabyName, BabyNameId } from "../core/babyName";
-/** custom react hook to keep track of a list of baby name ids as favourites, offering also add and remove convenience functions.  */
+import { BabyName } from "../core/babyName";
+/** React custom hook to keep track of a list of baby names as favourites, offering also add and remove convenience functions.  */
 export function useFavourites() {
-    const [favouritesIds, setFavouritesIds] = useState<BabyNameId[]>([]);
+    const [favourites, setFavourites] = useState<BabyName[]>([]);
 
     function addFavourite(nameToAdd: BabyName): void {
-        if (!favouritesIds.includes(nameToAdd.id)) {
-            setFavouritesIds((prevIds) => [...prevIds, nameToAdd.id]);
+        if (!favourites.find((f) => f.id === nameToAdd.id)) {
+            setFavourites((prevFavs) => [...prevFavs, nameToAdd]);
         }
     }
 
     function removeFavourite(nameToRemove: BabyName): void {
-        setFavouritesIds((prevIds) =>
-            prevIds.filter((id) => id !== nameToRemove.id)
+        setFavourites((prevFavs) =>
+            prevFavs.filter((f) => f.id !== nameToRemove.id)
         );
     }
-    return { favouritesIds, addFavourite, removeFavourite };
+    return { favourites, addFavourite, removeFavourite };
 }
