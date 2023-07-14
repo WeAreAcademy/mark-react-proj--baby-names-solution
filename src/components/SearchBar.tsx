@@ -1,19 +1,17 @@
+import { SexFilter } from "../core/babyName";
+
 export interface SearchBarProps {
     searchTerm: string;
     setSearchTerm: (st: string) => void;
     selectedSex: string;
-    selectMale: () => void;
-    selectFemale: () => void;
-    selectAllSexes: () => void;
+    setSelectedSex: (sex: SexFilter) => void;
 }
 
 export function SearchBar({
     searchTerm,
     setSearchTerm,
     selectedSex,
-    selectMale,
-    selectFemale,
-    selectAllSexes,
+    setSelectedSex,
 }: SearchBarProps): JSX.Element {
     return (
         <>
@@ -29,21 +27,21 @@ export function SearchBar({
                         className={`chooser anyChooser ${
                             selectedSex === "a" ? "selected" : ""
                         }`}
-                        onClick={selectAllSexes}
+                        onClick={() => setSelectedSex("a")}
                     ></div>
                     <div
                         title="show only girls' names"
                         className={`chooser femaleChooser ${
                             selectedSex === "f" ? "selected" : ""
                         }`}
-                        onClick={selectFemale}
+                        onClick={() => setSelectedSex("f")}
                     ></div>
                     <div
                         title="show only boys' names"
                         className={`chooser maleChooser ${
                             selectedSex === "m" ? "selected" : ""
                         }`}
-                        onClick={selectMale}
+                        onClick={() => setSelectedSex("m")}
                     ></div>
                 </span>
             </div>
