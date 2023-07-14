@@ -1,9 +1,10 @@
 A sample solution to the baby names project. React, with TypeScript.
 
-There are a couple of minor branches, so far:
+There are a couple of branches, so far:
 
--   One showing favourites being tracked only as IDs rather than full objects.
--   The other showing how FavouritesList can be parameterised as a wrapper around a re-used BabyNameList.
+-   One demonstrating sound effects with the useSound custom hook: dev-add-sound
+-   One showing favourites being tracked only as IDs rather than full objects: dev-maintain-favourites-as-ids-only
+-   The other showing how FavouritesList can be parameterised as a wrapper around a re-used BabyNameList: alt-reuse-list-as-child-of-faves
 
 # Original documentation from Create React App
 
