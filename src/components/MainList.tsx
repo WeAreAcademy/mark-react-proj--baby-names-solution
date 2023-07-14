@@ -1,22 +1,20 @@
 import { BabyName } from "../core/babyName";
 import { BabyNameView, NameClickHandler } from "./BabyNameView";
 
-interface MainListProps {
+interface BabyNameListProps {
     names: BabyName[];
     clickHandler: NameClickHandler;
 }
-export function MainList({ names, clickHandler }: MainListProps) {
+export function BabyNameList({ names, clickHandler }: BabyNameListProps) {
     return (
-        <div>
-            <ul>
-                {names.map((name) => (
-                    <BabyNameView
-                        key={name.id}
-                        babyName={name}
-                        clickHandler={clickHandler}
-                    />
-                ))}
-            </ul>
-        </div>
+        <ul>
+            {names.map((name) => (
+                <BabyNameView
+                    key={name.id}
+                    babyName={name}
+                    clickHandler={clickHandler}
+                />
+            ))}
+        </ul>
     );
 }

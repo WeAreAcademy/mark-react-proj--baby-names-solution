@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { BabyName, SexFilter, sortNames } from "../core/babyName";
 import { byNotInList, bySearch, bySex } from "../core/fancyFilters";
-import babyNamesData from "../data/babyNamesData.json";
+import unsortedBabyNamesData from "../data/babyNamesData.json";
 import { useFavourites } from "../hooks/useFavourites";
 import { FavouritesList } from "./FavouritesList";
-import { MainList } from "./MainList";
+import { BabyNameList } from "./MainList";
 import { SearchBar } from "./SearchBar";
 
-const sortedBabyNames: BabyName[] = sortNames(babyNamesData as BabyName[]);
+const sortedBabyNames: BabyName[] = sortNames(
+    unsortedBabyNamesData as BabyName[]
+);
 
 const BabyNamesApp = () => {
     const { favourites, addFavourite, removeFavourite } = useFavourites();
@@ -24,11 +26,8 @@ const BabyNamesApp = () => {
             <SearchBar
                 {...{ searchTerm, setSearchTerm, setSelectedSex, selectedSex }}
             />
-            <FavouritesList
-                favourites={favourites}
-                clickHandler={removeFavourite}
-            />
-            <MainList names={mainNamesToShow} clickHandler={addFavourite} />
+            <FavouritesList names={favourites} clickHandler={removeFavourite} />
+            <BabyNameList names={mainNamesToShow} clickHandler={addFavourite} />
         </div>
     );
 };

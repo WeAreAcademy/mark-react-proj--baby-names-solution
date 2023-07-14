@@ -1,30 +1,23 @@
 import { BabyName } from "../core/babyName";
-import { BabyNameView, NameClickHandler } from "./BabyNameView";
+import { NameClickHandler } from "./BabyNameView";
+import { BabyNameList } from "./MainList";
 
 export interface FavouritesListProps {
-    favourites: BabyName[];
+    names: BabyName[];
     clickHandler: NameClickHandler;
 }
 
 export function FavouritesList({
-    favourites,
+    names,
     clickHandler,
 }: FavouritesListProps): JSX.Element {
     return (
         <div className="favourites">
             <span>Favourites: </span>
-            {favourites.length === 0 ? (
+            {names.length === 0 ? (
                 <span>Click some names below to add to your shortlist...</span>
             ) : (
-                <ul>
-                    {favourites.map((babyName) => (
-                        <BabyNameView
-                            key={babyName.id}
-                            babyName={babyName}
-                            clickHandler={clickHandler}
-                        />
-                    ))}
-                </ul>
+                <BabyNameList names={names} clickHandler={clickHandler} />
             )}
         </div>
     );
