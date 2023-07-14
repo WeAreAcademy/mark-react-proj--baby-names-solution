@@ -1,5 +1,10 @@
 A sample solution to the baby names project. React, with TypeScript.
 
+There are a couple of minor branches, so far:
+
+-   One showing favourites being tracked only as IDs rather than full objects.
+-   The other showing how FavouritesList can be parameterised as a wrapper around a re-used BabyNameList.
+
 # Original documentation from Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
