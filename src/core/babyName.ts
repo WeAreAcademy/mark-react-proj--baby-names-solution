@@ -1,9 +1,9 @@
 export type BabyNameId = number;
 
 export interface BabyName {
-    name: string;
-    sex: Sex;
-    id: BabyNameId;
+    readonly name: string;
+    readonly sex: Sex;
+    readonly id: BabyNameId;
 }
 
 export type Sex = "m" | "f";
